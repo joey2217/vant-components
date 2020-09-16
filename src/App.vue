@@ -16,6 +16,14 @@
         v-model="datetime"
       />
     </van-form>
+    <a
+      href="https://github.com/BurNing1993/vant-components"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github"
+    >
+      <img :src="require('./github.svg')" alt="github" />Github
+    </a>
   </div>
 </template>
 
@@ -49,4 +57,15 @@ export default {
 </script>
 
 <style lang="scss">
+.github {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  img{
+    width: 20px;
+    height: 20px;
+  }
+}
 </style>
