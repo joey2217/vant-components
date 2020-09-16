@@ -2,14 +2,19 @@
   <div id="app">
     <van-form>
       <VantSelect
-        label="Select"
         v-model="select"
+        label="Select"
         name-props="label"
         :options="options"
         @select="onSelect"
       />
-      <VantDatePicker label="DatePicker" v-model="date" />
-      <VantDatetimePicker label-width="120px" label="DatetimePicker" v-model="datetime" />
+      <VantDatePicker v-model="date" value-format="YYYY-MM-DD" label="DatePicker" />
+      <VantDatetimePicker
+        label-width="120px"
+        value-format="YYYY-MM-DD HH:mm"
+        label="DatetimePicker"
+        v-model="datetime"
+      />
     </van-form>
   </div>
 </template>
@@ -36,8 +41,8 @@ export default {
   },
   components: {},
   methods: {
-    onSelect(data) {
-      console.log(data);
+    onSelect(data, index) {
+      console.log(data, index);
     },
   },
 };

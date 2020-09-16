@@ -4,9 +4,9 @@
       v-bind="$attrs"
       readonly
       clickable
-      :disabled="disable"
+      :disabled="disabled"
       name="datetimePicker"
-      right-icon="arrow-down"
+      :right-icon="show?'arrow-up':'arrow-down'"
       :value="value|dateTimeFilter"
       @click="onClick"
     />
@@ -30,12 +30,12 @@ export default {
   components: {},
   filters: {
     dateTimeFilter(date) {
-      return date && dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+      return date && dayjs(date).format('YYYY-MM-DD HH:mm');
     },
   },
   props: {
     value: [Date, String, Number],
-    disable: {
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -57,10 +57,18 @@ export default {
   methods: {
     onClick() {
       this.date = this.value || new Date();
-      this.show = !this.disable;
+      this.show = !this.disabled;
     },
     onConfirm(time) {
-      this.$emit('change', time);
+      if (this.valueFormat) {
+        if (this.valueFormat === 'timestamp') {
+          this.$emit('change', dayjs(time).valueOf());
+        } else {
+          this.$emit('change', dayjs(time).format(this.valueFormat));
+        }
+      } else {
+        this.$emit('change', time);
+      }
       this.show = false;
     },
   },

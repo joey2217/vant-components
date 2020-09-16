@@ -61,8 +61,12 @@ export default {
       this.show = !this.disabled;
     },
     onConfirm(time) {
-      if (this.formatter) {
-        this.$emit('change', this.parseTime(time, this.formatter));
+      if (this.valueFormat) {
+        if (this.valueFormat === 'timestamp') {
+          this.$emit('change', dayjs(time).valueOf());
+        } else {
+          this.$emit('change', dayjs(time).format(this.valueFormat));
+        }
       } else {
         this.$emit('change', time);
       }

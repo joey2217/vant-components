@@ -4,6 +4,7 @@
       v-bind="$attrs"
       :disabled="disabled"
       readonly
+      :value="value"
       :right-icon="show?'arrow-up':'arrow-down'"
       @click="show = !disabled"
     />
@@ -21,8 +22,12 @@
 export default {
   name: 'VantSelect',
   components: {},
-
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: {
+    value: [String, Number],
     options: {
       type: Array,
       require: true,
@@ -44,14 +49,19 @@ export default {
   computed: {
     actions() {
       if (this.nameProps) {
-        return this.options.map(item => ({ ...item, name: item[this.nameProps] }));
+        return this.options.map((item) => ({
+          ...item,
+          name: item[this.nameProps],
+        }));
       }
       return this.options;
     },
   },
   methods: {
-    onSelect(data) {
-      this.$emit('select', data);
+    onSelect(data, index) {
+      const name = this.nameProps ? data[this.nameProps] : data.name;
+      this.$emit('change', name);
+      this.$emit('select', data, index);
       this.show = false;
     },
   },
