@@ -77,6 +77,7 @@ export default {
     },
     onRightIconClick() {
       if (this.clearable && this.value) {
+        this.$emit('change', undefined);
         const [row] = this.actions;
         if (row) {
           const keys = Object.keys(row);
@@ -84,10 +85,9 @@ export default {
           keys.forEach((key) => {
             data[key] = undefined;
           });
-          this.$emit('select', data);
           this.$emit('clear', data);
+          this.$emit('select', data);
         }
-        this.$emit('change', undefined);
       } else {
         this.show = !this.disabled;
       }
