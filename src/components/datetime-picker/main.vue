@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     rightIcon() {
-      if (this.value && this.clearable) {
+      if (this.value && this.clearable && !this.disabled) {
         return 'clear';
       }
       return this.show ? 'arrow-up' : 'arrow-down';
@@ -84,6 +84,9 @@ export default {
       this.show = false;
     },
     onRightIconClick() {
+      if (this.disabled) {
+        return;
+      }
       if (this.clearable && this.value) {
         this.$emit('change', undefined);
       } else {

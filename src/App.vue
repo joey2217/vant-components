@@ -5,6 +5,7 @@
         v-model="select"
         label="Select"
         clearable
+        disabled
         name-props="label"
         :options="options"
         @select="onSelect"
