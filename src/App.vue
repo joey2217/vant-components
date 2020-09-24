@@ -4,13 +4,20 @@
       <VantSelect
         v-model="select"
         label="Select"
+        clearable
         name-props="label"
         :options="options"
         @select="onSelect"
       />
-      <VantDatePicker v-model="date" value-format="YYYY-MM-DD" label="DatePicker" />
+      <VantDatePicker
+        v-model="date"
+        clearable
+        value-format="YYYY-MM-DD"
+        label="DatePicker"
+      />
       <VantDatetimePicker
         label-width="120px"
+        clearable
         value-format="YYYY-MM-DD HH:mm"
         label="DatetimePicker"
         v-model="datetime"
@@ -63,7 +70,7 @@ export default {
   right: 10px;
   display: flex;
   align-items: center;
-  img{
+  img {
     width: 20px;
     height: 20px;
   }

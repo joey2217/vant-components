@@ -1,6 +1,6 @@
 {
   "name": "vant-components",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "lib/vant-components.common.js",
   "unpkg": "lib/vant-components.umd.js",

@@ -5,8 +5,9 @@
       :disabled="disabled"
       readonly
       :value="value"
-      :right-icon="show?'arrow-up':'arrow-down'"
+      :right-icon="rightIcon"
       @click="show = !disabled"
+      @click-right-icon.stop="onRightIconClick"
     />
     <van-action-sheet
       v-model="show"
@@ -40,6 +41,10 @@ export default {
       type: String,
       default: 'name',
     },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -56,6 +61,12 @@ export default {
       }
       return this.options;
     },
+    rightIcon() {
+      if (this.value && this.clearable) {
+        return 'clear';
+      }
+      return this.show ? 'arrow-up' : 'arrow-down';
+    },
   },
   methods: {
     onSelect(data, index) {
@@ -63,6 +74,23 @@ export default {
       this.$emit('change', name);
       this.$emit('select', data, index);
       this.show = false;
+    },
+    onRightIconClick() {
+      if (this.clearable && this.value) {
+        const [row] = this.actions;
+        if (row) {
+          const keys = Object.keys(row);
+          const data = {};
+          keys.forEach((key) => {
+            data[key] = undefined;
+          });
+          this.$emit('select', data);
+          this.$emit('clear', data);
+        }
+        this.$emit('change', undefined);
+      } else {
+        this.show = !this.disabled;
+      }
     },
   },
   created() {},

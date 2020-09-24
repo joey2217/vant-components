@@ -2,12 +2,13 @@
   <div>
     <van-field
       v-bind="$attrs"
-      :value="value|dateFilter"
+      :value="value | dateFilter"
       readonly
       clickable
       :disabled="disabled"
-      :right-icon="show?'arrow-up':'arrow-down'"
+      :right-icon="rightIcon"
       @click="onClick"
+      @click-right-icon.stop="onRightIconClick"
     />
     <van-popup v-model="show" position="bottom">
       <van-datetime-picker
@@ -47,6 +48,10 @@ export default {
     valueFormat: {
       type: String,
     },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -54,7 +59,14 @@ export default {
       date: new Date(),
     };
   },
-  computed: {},
+  computed: {
+    rightIcon() {
+      if (this.value && this.clearable) {
+        return 'clear';
+      }
+      return this.show ? 'arrow-up' : 'arrow-down';
+    },
+  },
   methods: {
     onClick() {
       this.date = this.value || new Date();
@@ -71,6 +83,13 @@ export default {
         this.$emit('change', time);
       }
       this.show = false;
+    },
+    onRightIconClick() {
+      if (this.clearable && this.value) {
+        this.$emit('change', undefined);
+      } else {
+        this.onClick();
+      }
     },
   },
   created() {},

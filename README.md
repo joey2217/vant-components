@@ -58,6 +58,7 @@ Vue.use(Select);
 | v-model        | 绑定值                                                      | string/number | -      |
 | options        | 选项                                                        | any[]         | -      |
 | disabled       | 是否禁用                                                    | boolean       | false  |
+| clearable      | 是否可清除                                                  | boolean       | false  |
 | name-props     | 显示字段的 key                                              | string        | name   |
 | 其他(label...) | 同[Field](https://vant-contrib.gitee.io/vant/#/zh-CN/field) | -             | -      |
 
@@ -81,6 +82,7 @@ Vue.use(Select);
 | -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
 | v-model        | 绑定值                                                          | string/number                                                          | -      |
 | disabled       | 是否禁用                                                        | boolean                                                                | false  |
+| clearable      | 是否可清除                                                      | boolean                                                                | false  |
 | value-format   | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -      |
 | 其他(label...) | 同[Field](https://vant-contrib.gitee.io/vant/#/zh-CN/field)     | -                                                                      | -      |
 
@@ -98,7 +100,7 @@ Vue.use(Select);
 
 - Props
 
-| 参数         | 说明                                                                     | 类型                                                                   | 默认值 |
-| ------------ | ------------------------------------------------------------------------ | ---------------------------------------------------------------------- | ------ |
+| 参数         | 说明                                                                  | 类型                                                                   | 默认值 |
+| ------------ | --------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD HH:mm) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -      |
-| 其他         | 同 DatePicker                                                            | -                                                                      | -      |
+| 其他         | 同 DatePicker                                                         | -                                                                      | -      |
