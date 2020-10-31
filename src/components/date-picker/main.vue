@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     onClick() {
-      this.date = this.value || new Date();
+      this.date = dayjs(this.value).$d || new Date();
       this.show = !this.disabled;
     },
     onConfirm(time) {
