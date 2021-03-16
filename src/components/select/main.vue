@@ -2,20 +2,23 @@
   <div>
     <van-field
       v-bind="$attrs"
-      :disabled="disabled"
       readonly
+      clickable
+      :disabled="disabled"
       :value="value"
       :right-icon="rightIcon"
       @click="show = !disabled"
       @click-right-icon.stop="onRightIconClick"
     />
-    <van-action-sheet
-      v-model="show"
-      :actions="actions"
-      cancel-text="取消"
-      @select="onSelect"
-      @cancel="show = false"
-    />
+    <van-popup v-model="show" position="bottom">
+      <van-picker
+        show-toolbar
+         :title="title"
+        :columns="columns"
+        @cancel="show = false"
+        @confirm="onSelect"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -37,13 +40,17 @@ export default {
       type: Boolean,
       default: false,
     },
-    nameProps: {
+    textProps: {
       type: String,
-      default: 'name',
+      default: 'text',
     },
     clearable: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      default: '单选',
     },
   },
   data() {
@@ -52,11 +59,11 @@ export default {
     };
   },
   computed: {
-    actions() {
-      if (this.nameProps) {
+    columns() {
+      if (this.textProps) {
         return this.options.map((item) => ({
           ...item,
-          name: item[this.nameProps],
+          text: item[this.textProps],
         }));
       }
       return this.options;
@@ -70,7 +77,7 @@ export default {
   },
   methods: {
     onSelect(data, index) {
-      const name = this.nameProps ? data[this.nameProps] : data.name;
+      const name = this.textProps ? data[this.textProps] : data.text;
       this.$emit('change', name);
       this.$emit('select', data, index);
       this.show = false;
@@ -81,7 +88,7 @@ export default {
       }
       if (this.clearable && this.value) {
         this.$emit('change', undefined);
-        const [row] = this.actions;
+        const [row] = this.columns;
         if (row) {
           const keys = Object.keys(row);
           const data = {};
@@ -96,7 +103,8 @@ export default {
       }
     },
   },
-  created() {},
+  created() {
+  },
 };
 </script>
 

@@ -20,20 +20,20 @@ yarn add vant-components  # or npm install vant-components --save
 
 ```js
 // main.js
-import Vue from "vue";
-import VantComponents from "vant-components";
+import Vue from 'vue'
+import VantComponents from 'vant-components'
 
-Vue.use(VantComponents);
+Vue.use(VantComponents)
 ```
 
 ### 按需引入组件
 
 ```js
 // main.js
-import Vue from "vue";
-import { Select } from "vant-components";
+import Vue from 'vue'
+import { Select } from 'vant-components'
 
-Vue.use(Select);
+Vue.use(Select)
 ```
 
 ## 组件
@@ -78,29 +78,32 @@ Vue.use(Select);
 
 - Props
 
-| 参数           | 说明                                                            | 类型                                                                   | 默认值 |
-| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
-| v-model        | 绑定值                                                          | string/number                                                          | -      |
-| disabled       | 是否禁用                                                        | boolean                                                                | false  |
-| clearable      | 是否可清除                                                      | boolean                                                                | false  |
-| value-format   | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -      |
-| 其他(label...) | 同[Field](https://vant-contrib.gitee.io/vant/#/zh-CN/field)     | -                                                                      | -      |
+| 参数           | 说明                                                            | 类型                                                                   | 默认值     |
+| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------- |
+| v-model        | 绑定值                                                          | string/timestamp                                                       | -          |
+| disabled       | 是否禁用                                                        | boolean                                                                | false      |
+| clearable      | 是否可清除                                                      | boolean                                                                | false      |
+| value-format   | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -          |
+| type           | 时间类型                                                        | 'date', 'time', 'year-month', 'month-day', 'datehour', 'datetime'      | date       |
+| format         | 显示格式化(默认与 type 匹配)                                    | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)           | YYYY-MM-DD |
+| 其他(label...) | 同[Field](https://vant-contrib.gitee.io/vant/#/zh-CN/field)     | -                                                                      | -          |
 
-### DateTimePicker
+### VantDateRange
 
 ```js
-<VantDatetimePicker
-  label-width="120px"
-  label="DatetimePicker"
-  v-model="datetime"
-/>
+<VantDateRange label-width="120px" label="VantDateRange" v-model="dateRange" />
 ```
 
-> VantDatetimePicker 组件为 vant field 和 datetime-picker 组合.
+> VantDateRange 组件为 vant field 和 datetime-picker 组合.
 
 - Props
 
-| 参数         | 说明                                                                  | 类型                                                                   | 默认值 |
-| ------------ | --------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
-| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD HH:mm) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -      |
-| 其他         | 同 DatePicker                                                         | -                                                                      | -      |
+| 参数           | 说明                                                            | 类型                                                                   | 默认值     |
+| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------- |
+| v-model        | 绑定值                                                          | Date[],timestamp[],String[]                                            | -          |
+| disabled       | 是否禁用                                                        | boolean                                                                | false      |
+| clearable      | 是否可清除                                                      | boolean                                                                | false      |
+| value-format   | 可选，绑定值的格式。不指定则绑定值为 Date 对象(常用 YYYY-MM-DD) | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)/timestamp | -          |
+| type           | 时间类型                                                        | 'date', 'time', 'year-month', 'month-day', 'datehour', 'datetime'      | date       |
+| format         | 显示格式化(默认与 type 匹配)                                    | [dayjs Format](https://day.js.org/docs/zh-CN/display/format)           | YYYY-MM-DD |
+| 其他(label...) | 同[Field](https://vant-contrib.gitee.io/vant/#/zh-CN/field)     | -                                                                      |

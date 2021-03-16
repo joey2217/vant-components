@@ -5,7 +5,6 @@
         v-model="select"
         label="Select"
         clearable
-        disabled
         name-props="label"
         :options="options"
         @select="onSelect"
@@ -16,12 +15,12 @@
         value-format="YYYY-MM-DD"
         label="DatePicker"
       />
-      <VantDatetimePicker
-        label-width="120px"
+      <VantDateRange
+        v-model="dateRange"
+        label="DateRange"
         clearable
-        value-format="YYYY-MM-DD HH:mm"
-        label="DatetimePicker"
-        v-model="datetime"
+        type="datetime"
+        label-width="100px"
       />
     </van-form>
     <a
@@ -41,15 +40,15 @@ export default {
   data() {
     return {
       date: new Date(),
-      datetime: new Date(),
       select: 'Vue',
+      dateRange: [],
       options: [
         {
-          label: 'Vue',
+          text: 'Vue',
           value: 'vue',
         },
         {
-          label: 'React',
+          text: 'React',
           value: 'react',
         },
       ],

@@ -2,7 +2,7 @@
   <div>
     <van-field
       v-bind="$attrs"
-      :value="value | dateFilter"
+      :value="dateFormat(value)"
       readonly
       clickable
       :disabled="disabled"
@@ -13,8 +13,8 @@
     <van-popup v-model="show" position="bottom">
       <van-datetime-picker
         v-model="date"
-        type="date"
-        title="选择日期"
+        :type="type"
+        :title="title"
         @confirm="onConfirm"
         @cancel="show = false"
       />
@@ -24,15 +24,18 @@
 
 <script>
 import dayjs from 'dayjs';
+const formatMap = {
+  date: 'YYYY-MM-DD',
+  time: 'HH:mm',
+  'year-month': 'YYYY-MM',
+  'month-day': 'MM-DD',
+  datehour: 'YYYY-MM-DD HH',
+  datetime: 'YYYY-MM-DD HH:mm',
+};
 
 export default {
   name: 'VantDatePicker',
   components: {},
-  filters: {
-    dateFilter(date) {
-      return date && dayjs(date).format('YYYY-MM-DD');
-    },
-  },
   model: {
     prop: 'value',
     event: 'change',
@@ -52,6 +55,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    format: {
+      type: String,
+      // default: 'YYYY-MM-DD',
+    },
+    title: {
+      type: String,
+      default: '选择日期',
+    },
+    type: {
+      // date time year-month month-day datehour datetime
+      type: String,
+      default: 'date',
+      validator: function(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['date', 'time', 'year-month', 'month-day', 'datehour', 'datetime'].indexOf(value) !== -1;
+      },
+    },
   },
   data() {
     return {
@@ -69,8 +89,15 @@ export default {
   },
   methods: {
     onClick() {
-      this.date = dayjs(this.value).$d || new Date();
-      this.show = !this.disabled;
+      if (this.disabled) {
+        return;
+      }
+      if (this.value) {
+        this.date = dayjs(this.value).$d;
+      } else {
+        this.date = new Date();
+      }
+      this.show = true;
     },
     onConfirm(time) {
       if (this.valueFormat) {
@@ -93,6 +120,9 @@ export default {
       } else {
         this.onClick();
       }
+    },
+    dateFormat(date) {
+      return date && dayjs(date).format(this.format || formatMap[this.type]);
     },
   },
   created() {},

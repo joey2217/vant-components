@@ -1,11 +1,11 @@
 import Select from './select';
 import DatePicker from './date-picker';
-import DatetimePicker from './datetime-picker';
+import DateRange from './date-range';
 
 const components = [
   Select,
   DatePicker,
-  DatetimePicker,
+  DateRange,
 ];
 
 const install = function(Vue, options = {}) {
@@ -25,5 +25,5 @@ export default {
 export {
   Select,
   DatePicker,
-  DatetimePicker,
+  DateRange,
 };
